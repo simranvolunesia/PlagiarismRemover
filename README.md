@@ -8,5 +8,6 @@ How to run it?
 4. Type your text to remove plagiarism.
 5. Press Remove Plagiarism button.
 6. Repress Remove Plagiarism button to get another flavour of Plagiarism Removed Text.
+
 Note: You can repress any no. of times to get different flavour of plagiarism remover, but after certain presses, user may get same result.
 
