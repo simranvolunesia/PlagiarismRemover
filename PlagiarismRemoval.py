@@ -5,20 +5,24 @@ Created on Fri May 29 16:03:34 2020
 @author: simran
 """
 
-import nltk
-from nltk.corpus import wordnet
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords 
+import tkinter as tk
+from functools import partial
+from nltk.corpus import stopwords
 import random
+from nltk.tokenize import word_tokenize
+from nltk.corpus import wordnet
+import nltk
+nltk.download()
 
-stop_words = stopwords.words("english") 
+stop_words = stopwords.words("english")
+
 
 def plagiarism_remover(i):
     word = i
     synonyms = []
     if word in stop_words:
         return word
-    if wordnet.synsets(word)==[]:
+    if wordnet.synsets(word) == []:
         return word
     for syn in wordnet.synsets(word):
         for lemma in syn.lemmas():
@@ -38,7 +42,8 @@ def plagiarism_remover(i):
         return random.choice(final_synonyms).title()
     else:
         return random.choice(final_synonyms)
-    
+
+
 def plagiarism_removal(para):
     para_split = word_tokenize(para)
     final_text = []
@@ -47,24 +52,26 @@ def plagiarism_removal(para):
     final_text = " ".join(final_text)
     return final_text
 
-import tkinter as tk  
-from functools import partial   
-def call_result(label_result, n):  
-    text = n.get()   
+
+def call_result(label_result, n):
+    text = n.get()
     result = plagiarism_removal(text)
-    label_result.config(text="Text after plagiarism removal is:\n %s" % result,wraplength=500)  
-    return    
-root = tk.Tk()  
-root.geometry('1000x1000')    
-root.title('Plagiarism Removal')  
-number1 = tk.StringVar()  
+    label_result.config(
+        text="Text after plagiarism removal is:\n %s" % result, wraplength=500)
+    return
+
+
+root = tk.Tk()
+root.geometry('1000x1000')
+root.title('Plagiarism Removal')
+number1 = tk.StringVar()
 labelNum1 = tk.Label(root, text="Enter text to remove plagiarism")
-labelNum1.grid(row=1, column=0)  
-labelResult = tk.Label(root)  
-labelResult.grid(row=7, column=2)  
+labelNum1.grid(row=1, column=0)
+labelResult = tk.Label(root)
+labelResult.grid(row=7, column=2)
 entryNum1 = tk.Entry(root, textvariable=number1)
-entryNum1.grid(row=1, column=2)     
-call_result = partial(call_result, labelResult, number1)   
+entryNum1.grid(row=1, column=2)
+call_result = partial(call_result, labelResult, number1)
 buttonCal = tk.Button(root, text="Remove Plagiarism", command=call_result)
-buttonCal.grid(row=3, column=0)   
-root.mainloop()  
+buttonCal.grid(row=3, column=0)
+root.mainloop()
